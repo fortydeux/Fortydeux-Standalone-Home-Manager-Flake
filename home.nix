@@ -22,6 +22,7 @@
     atuin.enable = true;
     bash.enable = true;
     fish.enable = true;
+    fzf.enable = true;
     helix = {
       enable = true;
       defaultEditor = true;
@@ -60,6 +61,12 @@
     };
     yazi.enable = true;
     yt-dlp.enable = true;
+    zellij = {
+      enable = true;
+      settings = {
+        # theme = "dracula";
+      };
+    };
   };
   
   # The home.packages option allows you to install Nix packages into your
@@ -127,6 +134,8 @@
     EDITOR = "hx";
     VISUAL = "hx";
   };
+
+  targets.genericLinux.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
