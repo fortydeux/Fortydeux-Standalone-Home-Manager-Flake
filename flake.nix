@@ -34,6 +34,12 @@
               ./hosts/mudskipper-linux-home.nix
             ];
         };
+        "fortydeux@whitebait-linux" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+              ./hosts/whitebait-linux-home.nix
+            ];
+        };
         "deck@steamdeck" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
