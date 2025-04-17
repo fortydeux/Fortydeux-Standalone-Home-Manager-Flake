@@ -71,16 +71,19 @@
         };
       };
     };
+    micro = {
+      enable = true;
+    };
     neovim = {
       enable = true;
       viAlias = true;
       vimAlias = true;
     };
-    ranger.enable = true;
     nnn = {
       enable = true;
       package = pkgs.nnn.override ({ withNerdIcons = true; });
     };
+    ranger.enable = true;
     yazi.enable = true;
     yt-dlp.enable = true;
     zellij = {
