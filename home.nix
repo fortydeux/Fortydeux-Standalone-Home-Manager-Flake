@@ -77,6 +77,8 @@
     # pkgs.hello
   
     # mullvad-vpn
+    axel
+    btop
     duf
     ripgrep
     fd
