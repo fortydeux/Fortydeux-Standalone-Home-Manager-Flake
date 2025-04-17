@@ -3,8 +3,6 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "fortydeux";
-  home.homeDirectory = "/home/fortydeux";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -20,8 +18,32 @@
   };
   programs = {
     atuin.enable = true;
-    bash.enable = true;
-    fish.enable = true;
+    bash = {
+      enable = true;
+      initExtra = ''
+        function y() {
+          local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+          yazi "$@" --cwd-file="$tmp"
+          if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            builtin cd -- "$cwd"
+          fi
+          rm -f -- "$tmp"
+        }
+      '';
+    };
+    fish = {
+      enable = true;
+      functions = {
+        y = ''
+          set tmp (mktemp -t "yazi-cwd.XXXXXX")
+          yazi $argv --cwd-file="$tmp"
+          if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+              builtin cd -- "$cwd"
+          end
+          rm -f -- "$tmp"
+        '';
+      };
+    };
     fzf.enable = true;
     helix = {
       enable = true;
@@ -81,9 +103,11 @@
     btop
     duf
     ripgrep
+    fastfetch
     fd
-    tldr
+    gh
     nerd-fonts.jetbrains-mono
+    tldr
     topgrade
     warp
             
