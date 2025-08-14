@@ -109,7 +109,7 @@
     fastfetch
     fd
     gh
-    moc
+    # moc
     nerd-fonts.jetbrains-mono
     tldr
     topgrade
