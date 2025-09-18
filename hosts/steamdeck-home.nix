@@ -17,7 +17,6 @@
 
   home.packages = with pkgs; [
     caffeine-ng # Keep computer awake
-    libsForQt5.plasma-applet-caffeine-plus # Applet for caffeine
     warp-terminal # Rust-based AI-enabled terminal
   ];
 }

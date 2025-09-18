@@ -105,12 +105,13 @@
     axel
     btop
     duf
-    ripgrep
     fastfetch
     fd
     gh
     # moc
     nerd-fonts.jetbrains-mono
+    nix-search
+    ripgrep
     tldr
     topgrade
     warp
