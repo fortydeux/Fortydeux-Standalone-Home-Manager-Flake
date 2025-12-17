@@ -388,6 +388,7 @@
     fastfetch
     fd
     gh
+    kitty
     # moc
     nerd-fonts.jetbrains-mono
     nix-search
