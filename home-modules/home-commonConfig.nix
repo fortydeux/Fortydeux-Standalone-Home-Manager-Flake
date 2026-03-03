@@ -24,32 +24,8 @@
   };
   programs = {
     atuin.enable = true;
-    bash = {
-      enable = true;
-      initExtra = ''
-        function y() {
-          local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-          yazi "$@" --cwd-file="$tmp"
-          if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-            builtin cd -- "$cwd"
-          fi
-          rm -f -- "$tmp"
-        }
-      '';
-    };
-    fish = {
-      enable = true;
-      functions = {
-        y = ''
-          set tmp (mktemp -t "yazi-cwd.XXXXXX")
-          yazi $argv --cwd-file="$tmp"
-          if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-              builtin cd -- "$cwd"
-          end
-          rm -f -- "$tmp"
-        '';
-      };
-    };
+    bash.enable = true;
+    fish.enable = true;
     fzf.enable = true;
     helix = {
       enable = true;
@@ -360,7 +336,10 @@
       package = pkgs.nnn.override ({ withNerdIcons = true; });
     };
     ranger.enable = true;
-    yazi.enable = true;
+    yazi = {
+      enable = true;
+      shellWrapperName = "y";
+    };
     yt-dlp.enable = true;
     zellij = {
       enable = true;
