@@ -358,7 +358,6 @@
 
     # AI Tools
     aichat
-    claude-code
   
     # mullvad-vpn
     axel
@@ -374,7 +373,6 @@
     ripgrep
     tldr
     topgrade
-    warp
             
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
