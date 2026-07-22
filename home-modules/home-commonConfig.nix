@@ -23,7 +23,10 @@
     enable = true;
   };
   programs = {
-    atuin.enable = true;
+    atuin = {
+      enable = true;
+      flags = [ "--disable-ctrl-r" ];
+    };
     bash.enable = true;
     fish.enable = true;
     fzf.enable = true;
