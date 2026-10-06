@@ -18,6 +18,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgsAarch64 = nixpkgs.legacyPackages.aarch64-linux;
     in {
       homeConfigurations = {
         "fortydeux@blackfin-linux" = home-manager.lib.homeManagerConfiguration {
@@ -53,6 +54,13 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [
               ./hosts/steamdeck-home.nix
+            ];
+        };
+        "steamos@frame" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgsAarch64;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+              ./hosts/steamframe-home.nix
             ];
         };
       };

@@ -371,6 +371,7 @@
     gh
     kitty
     # moc
+    nerd-fonts.hack
     nerd-fonts.jetbrains-mono
     nix-search
     ripgrep
