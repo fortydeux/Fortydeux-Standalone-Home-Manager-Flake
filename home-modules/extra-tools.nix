@@ -13,6 +13,8 @@
   home.packages = with pkgs; [
     claude-code
     warp
+    herdr
+    opencode
   ];
 
 }
