@@ -15,6 +15,7 @@
     warp
     herdr
     opencode
+    rclone
   ];
 
 }
