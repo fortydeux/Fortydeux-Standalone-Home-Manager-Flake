@@ -32,6 +32,45 @@
     "/var/lib/flatpak/exports/share"
   ];
 
+  # Desktop Mode is a nested Plasma that Steam launches (steam.service ->
+  # steamos-nested-desktop -> startplasma-wayland), so it inherits the user
+  # manager's PATH, which /etc/systemd/user.conf pins to /usr/local/bin:/usr/bin
+  # (environment.d PATH and plasma-workspace/env scripts don't take effect).
+  # Without the Nix profile on that PATH the KDE menu can't launch Nix apps and
+  # hides any whose .desktop file has TryExec (kitty, ghostty). set-environment
+  # overrides the manager default; appended so Nix binaries never shadow the
+  # system ones Steam relies on.
+  systemd.user.services.nix-session-path = {
+    Unit = {
+      Description = "Add the Nix profile to the user manager's PATH";
+      Before = [ "steam.service" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "/usr/bin/systemctl --user set-environment PATH=/usr/local/bin:/usr/bin:${config.home.profileDirectory}/bin:/nix/var/nix/profiles/default/bin";
+    };
+    Install.WantedBy = [ "steam.service" ];
+  };
+
+  # KDE Connect (not shipped by SteamOS). services.kdeconnect would run it as a
+  # systemd user service, but that lands on the Steam session's D-Bus, not the
+  # nested Desktop Mode bus (dbus-run-session), so nothing in Plasma can reach
+  # it. Autostart the daemon and the standalone tray indicator inside Plasma
+  # instead. The Plasma tray plasmoid can't work: it's built against Nix Qt
+  # (6.11) and SteamOS's plasmashell uses Qt 6.8 — disable it in System Tray
+  # settings.
+  home.packages = [ pkgs.kdePackages.kdeconnect-kde ];
+  xdg.configFile."autostart/org.kde.kdeconnect.daemon.desktop".source =
+    "${pkgs.kdePackages.kdeconnect-kde}/etc/xdg/autostart/org.kde.kdeconnect.daemon.desktop";
+  # The upstream indicator entry has NotShowIn=KDE, so write our own.
+  xdg.configFile."autostart/kdeconnect-indicator.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=KDE Connect Indicator
+    Exec=${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator
+    Icon=kdeconnect
+  '';
+
   # On-demand rclone pCloud mount:
   # directory listings come from pCloud immediately, file contents download
   # only when opened, and the local VFS cache is capped so it can't fill the

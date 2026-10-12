@@ -369,6 +369,7 @@
     fastfetch
     fd
     gh
+    ghostty
     kitty
     # moc
     nerd-fonts.hack
