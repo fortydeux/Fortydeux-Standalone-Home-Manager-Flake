@@ -371,7 +371,7 @@
     gh
     ghostty
     kitty
-    # moc
+    moc
     nerd-fonts.hack
     nerd-fonts.jetbrains-mono
     nix-search

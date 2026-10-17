@@ -12,7 +12,7 @@
       url = "github:nix-community/nixvim";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-    yazelix.url = "github:Yazelix/nova/stable";
+    # yazelix.url = "github:Yazelix/nova/stable";
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
