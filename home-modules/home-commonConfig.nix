@@ -59,6 +59,10 @@
     micro = {
       enable = true;
     };
+    nix-search-tv = {
+      enable = true;
+      enableTelevisionIntegration = true;
+    };
     nixvim = {
       enable = true;
       # enableMan = false;
@@ -339,6 +343,9 @@
       package = pkgs.nnn.override ({ withNerdIcons = true; });
     };
     ranger.enable = true;
+    television = {
+      enable = true;
+    };
     yazi = {
       enable = true;
       shellWrapperName = "y";
